@@ -65,6 +65,12 @@ final class JeditorHtmlPanel implements AsciiDocHtmlPanel {
     final StyleSheet customStyle = loadStyleSheet(JeditorHtmlPanel.class.getResource(cssFile));
     final StyleSheet style = HTMLEditorKitBuilder.simple().getStyleSheet();
     style.addStyleSheet(customStyle);
+
+    if (isDarcula()) {
+      String bgColor = AsciiDocApplicationSettings.getInstance().getAsciiDocPreviewSettings().getDarculaBackgroundColor();
+      style.addRule("body { background-color: " + bgColor + "; }");
+    }
+
     kit.setStyleSheet(style);
 
     //

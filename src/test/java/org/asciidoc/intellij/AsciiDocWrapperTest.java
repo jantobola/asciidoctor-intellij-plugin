@@ -218,6 +218,7 @@ public class AsciiDocWrapperTest extends BasePlatformTestCase {
       true,
       1,
       false,
+      "",
       ""));
     try {
       String html = asciidocWrapper.render("""
@@ -258,6 +259,7 @@ public class AsciiDocWrapperTest extends BasePlatformTestCase {
       true,
       1,
       false,
+      "",
       ""));
     try {
       String html = asciidocWrapper.render("""
@@ -307,6 +309,7 @@ public class AsciiDocWrapperTest extends BasePlatformTestCase {
       true,
       1,
       false,
+      "",
       ""));
     try {
       String html = asciidocWrapper.render("""
@@ -345,6 +348,7 @@ public class AsciiDocWrapperTest extends BasePlatformTestCase {
       true,
       1,
       false,
+      "",
       ""));
     try {
       String html = asciidocWrapper.render("""
@@ -386,6 +390,7 @@ public class AsciiDocWrapperTest extends BasePlatformTestCase {
       true,
       1,
       false,
+      "",
       ""));
     try {
       String html = asciidocWrapper.render("""

@@ -105,6 +105,12 @@ public final class AsciiDocPreviewSettings {
   @Nullable
   private String myHideErrorsByLanguage;
 
+  @Attribute("DarculaBackgroundColor")
+  @Nullable
+  private String myDarculaBackgroundColor = "#45494a";
+
+  public static final String DEFAULT_DARCULA_BACKGROUND_COLOR = "#45494a";
+
   public AsciiDocPreviewSettings() {
   }
 
@@ -125,7 +131,8 @@ public final class AsciiDocPreviewSettings {
                                  boolean enableBuiltInMermaid,
                                  int zoom,
                                  boolean hideErrorsInSourceBlocks,
-                                 @Nullable String hideErrorsByLanguage) {
+                                 @Nullable String hideErrorsByLanguage,
+                                 @Nullable String darculaBackgroundColor) {
     mySplitEditorLayout = splitEditorLayout;
     myHtmlPanelProviderInfo = htmlPanelProviderInfo;
     myPreviewTheme = previewTheme;
@@ -146,6 +153,7 @@ public final class AsciiDocPreviewSettings {
     myZoom = zoom;
     myHideErrorsInSourceBlocks = hideErrorsInSourceBlocks;
     myHideErrorsByLanguage = hideErrorsByLanguage;
+    myDarculaBackgroundColor = darculaBackgroundColor;
   }
 
   @NotNull
@@ -316,6 +324,9 @@ public final class AsciiDocPreviewSettings {
     if (!Objects.equals(myHideErrorsByLanguage, that.myHideErrorsByLanguage)) {
       return false;
     }
+    if (!Objects.equals(myDarculaBackgroundColor, that.myDarculaBackgroundColor)) {
+      return false;
+    }
     return attributes.equals(that.attributes);
   }
 
@@ -341,6 +352,7 @@ public final class AsciiDocPreviewSettings {
     result = 31 * result + Objects.hashCode(myZoom);
     result = 31 * result + (myHideErrorsInSourceBlocks ? 1 : 0);
     result = 31 * result + Objects.hashCode(myHideErrorsByLanguage);
+    result = 31 * result + Objects.hashCode(myDarculaBackgroundColor);
     return result;
   }
 
@@ -381,6 +393,12 @@ public final class AsciiDocPreviewSettings {
 
   public boolean isEnableBuiltInMermaid() {
     return myEnableBuiltInMermaid;
+  }
+
+  @NotNull
+  public String getDarculaBackgroundColor() {
+    return myDarculaBackgroundColor == null || myDarculaBackgroundColor.isEmpty()
+      ? DEFAULT_DARCULA_BACKGROUND_COLOR : myDarculaBackgroundColor;
   }
 
   public interface Holder {

@@ -409,6 +409,14 @@ public class BrowserPanel implements Disposable {
     } else {
       html = AsciiDocWrapper.enrichPage(html, getCssLines(isDarcula() ? myInlineCssDarcula + myTabsCssDarcula : myInlineCss) + myFontAwesomeCssLink + myGoogleFontsCssLink + myDejavuCssLink, myMermaidScript, myAsciidoctorTabsScript, attributes, project);
     }
+
+    if (isDarcula()) {
+      String bgColor = AsciiDocApplicationSettings.getInstance().getAsciiDocPreviewSettings().getDarculaBackgroundColor();
+      html = html.replace("</head>",
+        getCssLines("#content>h1:first-child:not([class]),body{background-color:" + bgColor + "}" +
+          "table:not(.linenotable):not(.CodeRay) tbody tr{background:" + bgColor + "}") + "</head>");
+    }
+
     html = html.replace("</body>", getScriptingLines() + "</body>");
     return html;
   }

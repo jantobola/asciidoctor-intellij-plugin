@@ -91,6 +91,8 @@ public class AsciiDocPreviewSettingsForm implements AsciiDocPreviewSettings.Hold
   private LinkLabel<?> myDownloadDependenciesFailedJSyntraxBrowser;
   private JBCheckBox myEnableConversionOfClipboardText;
   private JBCheckBox myEnableBuiltInMermaid;
+  private JBTextField myDarculaBackgroundColor;
+  private JPanel myDarculaBackgroundPanel;
   private LinkLabel<?> myDownloadDependenciesFailedBatikBrowser;
   private JPanel myDownloadDependenciesFailedBatik;
   private LinkLabel<?> myDownloadDependenciesFailedBatikPickFile;
@@ -267,6 +269,9 @@ public class AsciiDocPreviewSettingsForm implements AsciiDocPreviewSettings.Hold
 
     myEnableBuiltInMermaid.setSelected(settings.isEnableBuiltInMermaid());
 
+    myDarculaBackgroundColor.setText(settings.getDarculaBackgroundColor());
+    myDarculaBackgroundColor.setTextToTriggerEmptyTextStatus(AsciiDocPreviewSettings.DEFAULT_DARCULA_BACKGROUND_COLOR);
+
     myKrokiUrl.setTextToTriggerEmptyTextStatus("https://kroki.io");
 
     NumberFormat rateFormat = NumberFormat.getNumberInstance();
@@ -387,6 +392,11 @@ public class AsciiDocPreviewSettingsForm implements AsciiDocPreviewSettings.Hold
       krokiUrl = "";
     }
 
+    String darculaBg = myDarculaBackgroundColor.getText();
+    if (AsciiDocPreviewSettings.DEFAULT_DARCULA_BACKGROUND_COLOR.equals(darculaBg)) {
+      darculaBg = "";
+    }
+
     return new AsciiDocPreviewSettings(mySplitLayoutModel.getSelectedItem(),
       myPreviewPanelModel.getSelected(), myPreviewThemeModel.getSelectedItem(), mySafeModeModel.getSelectedItem(), attributes,
       myVerticalLayout.isSelected(), myEditorTop.isSelected() || myEditorLeft.isSelected(), myEnableInjections.isSelected(),
@@ -395,7 +405,8 @@ public class AsciiDocPreviewSettingsForm implements AsciiDocPreviewSettings.Hold
       myEnableKroki.isSelected(), krokiUrl, myEnabledAttributeFolding.isSelected(), myEnableConversionOfClipboardText.isSelected(),
       myEnableBuiltInMermaid.isSelected(),
       getZoom(),
-      myHideErrorsInSourceBlocks.isSelected(), myHideErrorsByLanguage.getText());
+      myHideErrorsInSourceBlocks.isSelected(), myHideErrorsByLanguage.getText(),
+      darculaBg);
   }
 
   private int getZoom() {

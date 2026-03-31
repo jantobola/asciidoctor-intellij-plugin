@@ -868,6 +868,13 @@ public class AsciiDocJCEFHtmlPanel extends JCEFHtmlPanel implements AsciiDocHtml
       html = AsciiDocWrapper.enrichPage(html, AsciiDocHtmlPanel.getCssLines(isDarcula() ? myInlineCssDarcula + myTabsCssDarcula : myInlineCss) + myFontAwesomeCssLink + myDroidSansMonoCssLink + myGoogleFontsCssLink + myDejavuCssLink, myMermaidScript, myAsciidoctorTabsScript, attributes, editor != null ? editor.getProject() : null);
     }
 
+    if (isDarcula()) {
+      String bgColor = AsciiDocApplicationSettings.getInstance().getAsciiDocPreviewSettings().getDarculaBackgroundColor();
+      html = html.replace("</head>",
+        AsciiDocHtmlPanel.getCssLines("#content>h1:first-child:not([class]),body{background-color:" + bgColor + "}" +
+          "table:not(.linenotable):not(.CodeRay) tbody tr{background:" + bgColor + "}") + "</head>");
+    }
+
     html = html.replaceAll("<head>", "<head>\n" +
       "<meta http-equiv=\"Content-Security-Policy\" content=\"" + PreviewStaticServer.createCSP(attributes) + "\">");
 
